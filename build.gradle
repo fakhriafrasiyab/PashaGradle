@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+}
+
+group 'pashaBank'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
+}
+
+//task wrapper2(type: Wrapper) {
+//    gradleVersion="5.6.2"
+//}
+task Task1() {
+    println("Task1");
+};
+task Task2(){
+    println("Task2");
+};
+task Task3
+Task3.description = "yeni task"
+println(Task3.description);
+Task3.doLast{println("This is Task3")};
+
+def projectVersion = "5.6.2";
+
+task Task4 {
+    description "This is task 4 -version  $projectVersion"
+    doFirst {
+        println "Task 4 --- First "
+    }doLast {
+        println description
+    }
+}
+
+Task4.doFirst {
+    println "Another first"
+}
+
+Task4.dependsOn Task3
+Task4.dependsOn Task2
+Task3.dependsOn Task2
